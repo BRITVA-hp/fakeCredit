@@ -25,17 +25,38 @@
 
                     <div class="col-span-6 sm:col-span-2">
                       <label for="first-name" class="block text-sm font-medium text-gray-700">ФИО</label>
-                      <input placeholder="Иванов Иван Иванович" type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                      <input
+                          v-model="name"
+                          placeholder="Иванов Иван Иванович"
+                          type="text"
+                          name="first-name"
+                          id="first-name"
+                          autocomplete="given-name"
+                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                     </div>
 
                     <div class="col-span-6 sm:col-span-2">
                       <label for="last-name" class="block text-sm font-medium text-gray-700">Дата рождения</label>
-                      <input placeholder="дд.мм.гггг" type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                      <input
+                          v-model="DOB"
+                          placeholder="дд.мм.гггг"
+                          type="text"
+                          name="last-name"
+                          id="last-name"
+                          autocomplete="family-name"
+                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                     </div>
 
                     <div class="col-span-6 sm:col-span-2">
                       <label for="last-name" class="block text-sm font-medium text-gray-700">Телефон</label>
-                      <input placeholder="+7 (___) ___-____" type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                      <input
+                          maxlength="17"
+                          placeholder="+7 (___) ___-____"
+                          type="text"
+                          name="last-name"
+                          id="last-name"
+                          autocomplete="family-name"
+                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                     </div>
 
                     <hr class="col-span-6 my-4">
@@ -75,6 +96,11 @@
                     <div class="col-span-6 sm:col-span-3">
                       <label for="first-name" class="block text-sm font-medium text-gray-700">Адрес фактического проживания</label>
                       <input placeholder="Укажите адрес" type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+
+                      <div class="flex items-center mt-2">
+                        <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-900">Совпадает с адресом регистрации</label>
+                      </div>
                     </div>
 
                     <hr class="col-span-6 my-4">
@@ -114,16 +140,25 @@
 </template>
 
 <script>
-
-import textEffect from "@/assets/js/textEffect";
+import { useVuelidate } from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
 
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  setup() {
+    return { v$: useVuelidate() }
   },
-  mounted() {
-    textEffect('.effect')
+  data() {
+    return {
+      name: '',
+      DOB: ''
+    }
+  },
+  validations () {
+    return {
+      name: { required },
+      DOB: { required },
+    }
   }
 }
 </script>
