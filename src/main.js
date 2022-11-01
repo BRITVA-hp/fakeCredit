@@ -1,8 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import './assets/sass/main.sass'
-// import directives from "./directives";
+import './assets/sass/style.sass'
+import Maska from 'maska'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+// use as plugin
+app.use(Maska);
+
+app.mount('#app')
+
 
 

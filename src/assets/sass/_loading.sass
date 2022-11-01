@@ -1,0 +1,125 @@
+.loading
+  &__robot
+    position: absolute
+    z-index: 2
+    width: 50px
+    height: 50px
+    background: blue
+    left: 50%
+    top: 0
+    transform: translate(-50%, -50px)
+    transition-delay: 0.5s
+    transition-duration: 0.3s
+    &::before
+      content: ''
+      position: absolute
+      width: 30px
+      height: 2px
+      background: #000
+      left: 0
+      top: 5px
+      transform-origin: right top
+      transform: translateX(-25px) rotate(-30deg)
+    &::after
+      content: ''
+      position: absolute
+      width: 30px
+      height: 2px
+      background: #000
+      right: 0
+      top: 5px
+      transform-origin: left top
+      transform: translateX(25px) rotate(30deg)
+    &--end
+      transition-duration: 1s
+      &::before
+        transition: 0.3s
+        transition-delay: 0.3s
+        transform: translateX(-25px) rotate(30deg)
+      &::after
+        transition: 0.3s
+        transition-delay: 0.3s
+        transform: translateX(25px) rotate(-30deg)
+    &--jump
+      animation: jump 0.5s
+      animation-delay: 0.8s
+      animation-timing-function: cubic-bezier(.215,.61,.355,1)
+      &::before
+        animation: handLeft 1s ease-out 0.8s
+      &::after
+        animation: handRight 1s ease-out 0.8s
+  &__loader
+    width: 12px
+    height: 12px
+    border-radius: 50%
+    display: block
+    margin: 15px auto
+    color: #3b82f6
+    box-sizing: border-box
+    animation: loader 1s linear infinite alternate
+    position: absolute
+    bottom: 0
+    left: 50%
+    transform: translateX(-50%)
+  &__li
+    z-index: 1
+    top: 0
+    &__card
+      &--pls
+        display: none
+    &--end
+      position: relative
+      transform: none
+      text-align: left
+      font-size: 16px
+      left: 0
+      text-transform: none
+      font-weight: normal
+      transition: 0.5s
+      padding-left: 15px
+    &--process
+      position: relative
+      text-transform: uppercase
+      font-weight: bold
+      font-size: 25px
+      text-align: center
+      color: #fff
+      animation: fadeIn 0.3s
+      transition: none
+      padding-left: 0
+      .loading__li__card
+        animation: text 3s 0.3s infinite
+        display: block
+        background: #4ec7f3
+        position: relative
+        z-index: 1
+        &--pls
+          position: absolute
+          z-index: 1
+          left: 0
+          top: 0
+          right: 0
+          bottom: 0
+          transform: translateY(-100%)
+          animation: textPls 3s 0.3s infinite
+          background: #42c58a
+          display: flex
+          align-items: center
+          justify-content: center
+      .loading__li__window
+        display: inline-block
+        position: relative
+        overflow: hidden
+        &::before, &::after
+          content: ''
+          position: absolute
+          z-index: 3
+          left: 0
+          top: 0
+          width: 100%
+          height: 3px
+          background: #475569
+          border-radius: 2px
+        &::after
+          top: auto
+          bottom: 0
