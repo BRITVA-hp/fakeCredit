@@ -16,11 +16,7 @@
         :key="liIndex"
         :class="{ 'loading__li--process' : liIndex + 1 === counter }"
         class="loading__li--end loading__li"
-      ><span class="loading__li__window">
-        <span class="loading__li__field">
-          <span class="loading__li__card loading__li__card--pls">Загрузка</span><span class="loading__li__card">{{ li }}</span>
-        </span>
-      </span></li>
+      >{{ li }}</li>
     </ul>
 
     <span class="loading__loader"></span>
@@ -63,15 +59,18 @@ export default {
     const timerId = setInterval(() => {
       if (this.counter === this.items.length) {
         clearInterval(timerId)
-      }
-      if (this.counter < this.items.length) {
-        this.itemsRender.push(this.items[this.counter])
-      }
-      if (this.counter < this.items.length) {
-        this.top = this.counter * 24
-      } else {
         this.top = document.documentElement.scrollHeight
+        this.counter++
+        setInterval(() => {
+          this.$emit('loadingAppFalse')
+          this.$emit('lastAppTrue')
+        }, 2000)
+        return
       }
+      this.itemsRender.push(this.items[this.counter])
+
+      this.top = this.counter * 24
+
       this.counter++
     }, val)
   }

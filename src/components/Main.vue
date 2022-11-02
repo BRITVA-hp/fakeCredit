@@ -250,6 +250,21 @@ export default {
     }
   },
   methods: {
+    clearData() {
+      this.name = ''
+      this.DOB = ''
+      this.phone = ''
+      this.series = ''
+      this.number = ''
+      this.code = ''
+      this.organ = ''
+      this.date = ''
+      this.address = ''
+      this.addressF = ''
+      this.matches = false
+      this.goal = 'Бизнес'
+      this.sum = ''
+    },
     sumMask() {
       this.sum = this.sum.replace(/\D/g, '')
       this.sum = this.sum.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ')
@@ -262,8 +277,9 @@ export default {
         this.v$.$touch()
         return
       }
-      this.$emit('mainAppFalse')
-      this.$emit('loadingAppTrue')
+      this.$emit('loading', this.sum)
+      this.v$.$reset()
+      this.clearData()
     }
   },
   validations () {

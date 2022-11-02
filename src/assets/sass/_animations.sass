@@ -4,58 +4,29 @@
   to
     opacity: 1
 
-@keyframes text
+@keyframes loaderRotate
+  100%
+    transform: rotate(360deg)
+
+@keyframes loaderClip
   0%
-    transform: none
-    z-index: 2
+    clip-path: polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)
   25%
-    transform: translateY(100%)
-    z-index: 1
+    clip-path: polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)
   50%
-    transform: translateY(-100%)
-    z-index: 1
+    clip-path: polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)
   75%
-    transform: none
-    z-index: 2
+    clip-path: polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)
   100%
-    transform: none
-    z-index: 2
-
-@keyframes textPls
-  0%
-    transform: translateY(-100%)
-    z-index: 1
-  25%
-    transform: none
-    z-index: 2
-  50%
-    transform: none
-    z-index: 2
-  75%
-    transform: translateY(100%)
-    z-index: 1
-  100%
-    transform: translateY(-100%)
-    z-index: 1
-
-
-@keyframes loader
-  0%
-    box-shadow: -38px -12px ,  -14px 0,  14px 0, 38px 0
-  33%
-    box-shadow: -38px 0px, -14px -12px,  14px 0, 38px 0
-  66%
-    box-shadow: -38px 0px , -14px 0, 14px -12px, 38px 0
-  100%
-    box-shadow: -38px 0 , -14px 0, 14px 0 , 38px -12px
+    clip-path: polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)
 
 @keyframes jump
   0%
-    transform: translate(-50%, -50px)
+    transform: translate(-50%, -45px)
   50%
-    transform: translate(-50%, -55px)
-  100%
     transform: translate(-50%, -50px)
+  100%
+    transform: translate(-50%, -45px)
 
 @keyframes handLeft
   0%
