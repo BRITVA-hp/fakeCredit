@@ -7,7 +7,7 @@
         <div class="lg:col-span-1">
           <div class="px-4 sm:px-0">
             <h3 class="text-sm lg:text-lg font-medium leading-6 mb-3 lg:mb-5 text-green-300 sm:text-sky-500">ТОЛЬКО ДЛЯ СЛУЖЕБНОГО   ПОЛЬЗОВАНИЯ</h3>
-            <ul class="list-disc pl-6 lg:pl-8 sm:text-sky-500">
+            <ul class="list-disc pl-6 lg:pl-8 text-green-300 sm:text-sky-500">
               <li class="effect lg:mb-2">Точность расчетов</li>
               <li class="lg:mb-2">Достоверность данных</li>
               <li class="lg:mb-2">Конфиденциальность</li>
