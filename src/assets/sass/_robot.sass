@@ -1,0 +1,38 @@
+.robot
+  position: absolute
+  height: auto
+  &--loading
+    max-width: 150px
+    left: 50%
+    top: -300px
+    transform: translate(-50%, -45px)
+    transition-delay: 0.5s
+    transition-duration: 0.3s
+    &--jump
+      animation: jump 0.3s
+      animation-delay: 0.8s
+      animation-timing-function: ease-in
+    &--end
+      transition-duration: 1s
+      .robot__hand--left
+        transition: 0.3s
+        animation: none
+        transform: rotate(-90deg) translate(-123px, 89px)
+      .robot__hand--right
+        transition: 0.3s
+        animation: none
+        transform: rotate(90deg) translate(123px, 89px)
+  &--main
+    max-width: 200px
+    top: 24px
+    right: -45px
+  &__eyes
+    animation: robotEyes 15s infinite 2s
+    transform-origin: center 290px
+  &__hand
+    &--left
+      transform-origin: center center
+      animation: none
+    &--right
+      transform-origin: center center
+      animation: robotHandRight 30s infinite

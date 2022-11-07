@@ -5,10 +5,16 @@
     <h3 class="text-white sm:text-slate-600 px-2 sm:p-0 mb-4 lg:mb-6 font-bold text-md lg:text-xl">Ожидайте решения банков.</h3>
 
     <ul ref="ul" class="text-green-300 sm:text-green-500 relative">
-      <div
-        :style="'top: ' + top + 'px'"
-        :class="{ 'loading__robot--jump' : jump && this.counter <= this.items.length, 'loading__robot--end' : counter > items.length }"
-        class="loading__robot"></div>
+<!--      <div-->
+<!--        :style="'top: ' + top + 'px'"-->
+<!--        :class="{ 'loading__robot&#45;&#45;jump' : jump && this.counter <= this.items.length, 'loading__robot&#45;&#45;end' : counter > items.length }"-->
+<!--        class="loading__robot"></div>-->
+
+      <robot-app
+          :style="'top: ' + top + 'px'"
+          :class="{ 'robot--loading--jump' : jump && this.counter <= this.items.length, 'robot--loading--end' : counter > items.length }"
+          class="robot robot--loading z-40"
+      ></robot-app>
 
       <li
         ref="li"
@@ -25,8 +31,13 @@
 </template>
 
 <script>
+import RobotApp from "@/components/Robot";
+
 export default {
   name: "LoadingApp",
+  components: {
+    RobotApp
+  },
   watch: {
     counter() {
       this.jump = true
@@ -39,7 +50,7 @@ export default {
   data() {
     return {
       jump: false,
-      top: 0,
+      top: -95,
       delay: 20000,
       items: [
         'Обработка данных',
@@ -69,7 +80,7 @@ export default {
       }
       this.itemsRender.push(this.items[this.counter])
 
-      this.top = this.counter * 24
+      this.top = (this.counter * 24) - 95
 
       this.counter++
     }, val)

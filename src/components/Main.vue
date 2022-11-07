@@ -1,10 +1,14 @@
 <template>
   <div class="container sm:px-4 sm:py-12 rounded-xl sm:shadow-md m-auto sm:bg-gray-50">
+
     <h1 class="text-white sm:text-slate-600 px-2 sm:p-0 mb-4 lg:mb-6 text-left lg:text-center font-bold text-xl lg:text-2xl">Проверка скорингового балла ЧЕРЕЗ БКИ</h1>
 
     <div>
       <div class="md:grid lg:grid-cols-3 md:gap-6">
-        <div class="lg:col-span-1">
+        <div class="lg:col-span-1 relative">
+
+          <robot-app class="robot robot--main relative"></robot-app>
+
           <div class="px-4 sm:px-0">
             <h3 class="text-sm lg:text-lg font-medium leading-6 mb-3 lg:mb-5 text-green-300 sm:text-sky-500">ТОЛЬКО ДЛЯ СЛУЖЕБНОГО   ПОЛЬЗОВАНИЯ</h3>
             <ul class="list-disc pl-6 lg:pl-8 text-green-300 sm:text-sky-500">
@@ -226,9 +230,13 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength } from '@vuelidate/validators'
+import RobotApp from "@/components/Robot";
 
 export default {
   name: 'HelloWorld',
+  components: {
+    RobotApp
+  },
   setup() {
     return { v$: useVuelidate() }
   },

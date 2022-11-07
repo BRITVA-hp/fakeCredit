@@ -15,7 +15,7 @@
 
   </section>
 
-  <div v-if="loader" class="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity z-40">
+  <div v-if="loader" class="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity z-50">
     <span class="loading__loader loading__loader--main"></span>
   </div>
 </template>
@@ -41,8 +41,8 @@ export default {
     return {
       loader: false,
       sum: '1 000 000',
-      mainApp: true,
-      loadingApp: false,
+      mainApp: false,
+      loadingApp: true,
       lastApp: false
     }
   },
