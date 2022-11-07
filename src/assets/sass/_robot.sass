@@ -1,17 +1,15 @@
 .robot
   position: absolute
   height: auto
+  &--last
+    max-width: 150px
+    top: 200px
+    right: -40px
   &--loading
     max-width: 150px
     left: 50%
-    top: -300px
-    transform: translate(-50%, -45px)
-    transition-delay: 0.5s
-    transition-duration: 0.3s
-    &--jump
-      animation: jump 0.3s
-      animation-delay: 0.8s
-      animation-timing-function: ease-in
+    bottom: 0
+    transform: translateX(-50%)
     &--end
       transition-duration: 1s
       .robot__hand--left

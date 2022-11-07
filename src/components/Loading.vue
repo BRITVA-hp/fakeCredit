@@ -5,17 +5,6 @@
     <h3 class="text-white sm:text-slate-600 px-2 sm:p-0 mb-4 lg:mb-6 font-bold text-md lg:text-xl">Ожидайте решения банков.</h3>
 
     <ul ref="ul" class="text-green-300 sm:text-green-500 relative">
-<!--      <div-->
-<!--        :style="'top: ' + top + 'px'"-->
-<!--        :class="{ 'loading__robot&#45;&#45;jump' : jump && this.counter <= this.items.length, 'loading__robot&#45;&#45;end' : counter > items.length }"-->
-<!--        class="loading__robot"></div>-->
-
-      <robot-app
-          :style="'top: ' + top + 'px'"
-          :class="{ 'robot--loading--jump' : jump && this.counter <= this.items.length, 'robot--loading--end' : counter > items.length }"
-          class="robot robot--loading z-40"
-      ></robot-app>
-
       <li
         ref="li"
         v-for="(li, liIndex) in itemsRender"
@@ -26,7 +15,10 @@
     </ul>
 
     <span class="loading__loader"></span>
-
+    <robot-app
+      :class="{ 'robot--loading--end' : this.counter > this.items.length }"
+      class="robot robot--loading z-40"
+    ></robot-app>
   </div>
 </template>
 
@@ -38,20 +30,10 @@ export default {
   components: {
     RobotApp
   },
-  watch: {
-    counter() {
-      this.jump = true
-      const timeoutId = setTimeout(() => {
-        this.jump = false
-        clearTimeout(timeoutId)
-      }, 1800)
-    }
-  },
   data() {
     return {
       jump: false,
-      top: -95,
-      delay: 20000,
+      delay: 54000,
       items: [
         'Обработка данных',
         'Отправка данных в банки партнеры',
@@ -70,7 +52,6 @@ export default {
     const timerId = setInterval(() => {
       if (this.counter === this.items.length) {
         clearInterval(timerId)
-        this.top = document.documentElement.scrollHeight
         this.counter++
         setInterval(() => {
           this.$emit('loadingAppFalse')
@@ -79,9 +60,6 @@ export default {
         return
       }
       this.itemsRender.push(this.items[this.counter])
-
-      this.top = (this.counter * 24) - 95
-
       this.counter++
     }, val)
   }

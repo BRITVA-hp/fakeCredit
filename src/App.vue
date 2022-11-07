@@ -41,8 +41,8 @@ export default {
     return {
       loader: false,
       sum: '1 000 000',
-      mainApp: false,
-      loadingApp: true,
+      mainApp: true,
+      loadingApp: false,
       lastApp: false
     }
   },

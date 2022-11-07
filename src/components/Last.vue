@@ -1,5 +1,14 @@
 <template>
     <div class="container px-3 sm:px-6 sm:py-4 lg:py-12 rounded-xl sm:shadow-md mx-auto sm:bg-gray-50 relative">
+
+      <p @click="this.$emit('lastAppFalse')" class="uppercase flex items-center mb-3 cursor-pointer">
+        <svg width="38" height="16" viewBox="0 0 38 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.299109 7.28655C-0.0948399 7.67362 -0.100416 8.30676 0.286654 8.7007L6.59432 15.1205C6.98139 15.5144 7.61453 15.52 8.00848 15.1329C8.40243 14.7459 8.408 14.1127 8.02093 13.7188L2.41412 8.01231L8.12057 2.40549C8.51452 2.01842 8.5201 1.38528 8.13303 0.991334C7.74596 0.597385 7.11282 0.591809 6.71887 0.978879L0.299109 7.28655ZM37.4222 7.3206L1.00877 6.99989L0.991153 8.99981L37.4045 9.32052L37.4222 7.3206Z" fill="#475569"/>
+        </svg> &nbsp;
+        На главную</p>
+
+      <robot-app class="robot robot--last z-40"></robot-app>
+
       <h3 class="text-white sm:text-slate-600 px-2 sm:p-0 font-bold text-xl lg:text-2xl mb-4 lg:mb-8 text-center">КАЗАНСКОЕ БЮРО <br> ФИНАНСОВЫХ РЕШЕНИЙ</h3>
       <div class="grid grid-cols-3 lg:gap-6 gap-3 items-start mb-8 lg:mb-12">
 
@@ -14,7 +23,7 @@
         </div>
 
         <div class="col-span-3 lg:col-span-1 text-center lg:text-right">
-          <p class="text-white sm:text-slate-600 font-bold text-md lg:text-xl">Заявка действительна в течении:</p>
+          <p class="text-white sm:text-slate-600 font-bold text-md lg:text-xl">Заявка действительна <br class="sm:hidden"> в течении:</p>
           <p class="text-red-500 text-xl lg:text-2xl font-bold">{{ time }}</p>
         </div>
       </div>
@@ -55,7 +64,7 @@
       <transition name="modal">
         <div
           v-show="modal"
-          class="relative z-30">
+          class="relative z-40">
           <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
           <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -99,10 +108,14 @@
 </template>
 
 <script>
+import RobotApp from "@/components/Robot";
 
 export default {
   emits: ["lastAppFalse", 'apply'],
   name: "LastApp",
+  components: {
+    RobotApp
+  },
   props: {
     sum: {
       required: true
