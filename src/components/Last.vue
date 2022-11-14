@@ -9,7 +9,7 @@
 
       <robot-app class="robot robot--last z-40"></robot-app>
 
-      <h3 class="text-white sm:text-slate-600 px-2 sm:p-0 font-bold text-xl lg:text-2xl mb-4 lg:mb-8 text-center">КАЗАНСКОЕ БЮРО <br> ФИНАНСОВЫХ РЕШЕНИЙ</h3>
+      <h3 class="text-white sm:text-slate-600 px-2 sm:p-0 font-bold text-xl lg:text-2xl mb-4 lg:mb-8 text-center">Центр <br> Финасоаых Услуг</h3>
       <div class="grid grid-cols-3 lg:gap-6 gap-3 items-start mb-8 lg:mb-12">
 
         <div class="col-span-3 lg:col-span-1 text-center lg:text-left">
@@ -93,7 +93,7 @@
                 <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     @click="apply"
-                    type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Подать заявку</button>
+                    type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Отправить</button>
                   <button
                     @click="closeModal"
                     type="button" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Отмена</button>
