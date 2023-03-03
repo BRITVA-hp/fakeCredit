@@ -136,7 +136,7 @@ export default {
         },
         {
           bank1: 'ubrir',
-          bank2: 'unicredit'
+          bank2: 'open'
         },
         {
           bank1: 'renessans',
