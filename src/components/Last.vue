@@ -9,7 +9,7 @@
 
       <robot-app class="robot robot--last z-40"></robot-app>
 
-      <h3 class="text-white sm:text-slate-600 px-2 sm:p-0 font-bold text-xl lg:text-2xl mb-4 lg:mb-8 text-center">Центр <br> Финасоаых Услуг</h3>
+      <h3 class="text-white sm:text-slate-600 px-2 sm:p-0 font-bold text-xl lg:text-2xl mb-4 lg:mb-8 text-center">Центр <br> Финансовых Услуг</h3>
       <div class="grid grid-cols-3 lg:gap-6 gap-3 items-start mb-8 lg:mb-12">
 
         <div class="col-span-3 lg:col-span-1 text-center lg:text-left">
