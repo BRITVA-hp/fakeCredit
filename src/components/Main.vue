@@ -208,22 +208,157 @@
                       @input="sumMask()"
                       placeholder="1 000 000"
                       type="text"
-                      name="street-address"
-                      id="street-address"
-                      autocomplete="street-address"
+                      name="sum"
+                      id="sum"
+                      autocomplete="sum"
                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                     <p v-if="v$.sum.required.$invalid && v$.$dirty" class="absolute left-2 top-6 text-xs text-red-600">Обязательное поле</p>
                   </div>
+
+                  <hr class="col-span-6 my-4">
+
+                  <h6 class="col-span-6 font-bold">Другие данные клиента</h6>
+
+                  <div class="col-span-6 sm:col-span-2 relative">
+                    <label for="first-name" class="block text-sm font-medium text-gray-700">Должность</label>
+                    <input
+                        v-model="job"
+                        placeholder="Укажите должность"
+                        type="text"
+                        name="job"
+                        id="job"
+                        autocomplete="job"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    <p v-if="v$.job.required.$invalid && v$.$dirty" class="absolute left-2 top-6 text-xs text-red-600">Обязательное поле</p>
+                  </div>
+
+                  <div class="col-span-6 sm:col-span-2 relative">
+                    <label for="first-name" class="block text-sm font-medium text-gray-700">Доход</label>
+                    <input
+                        v-model="income"
+                        @input="incomeMask()"
+                        placeholder="10 000"
+                        type="text"
+                        name="income"
+                        id="income"
+                        autocomplete="income"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    <p v-if="v$.income.required.$invalid && v$.$dirty" class="absolute left-2 top-6 text-xs text-red-600">Обязательное поле</p>
+                  </div>
+
+                  <div class="col-span-6 sm:col-span-2 relative">
+                    <label for="first-name" class="block text-sm font-medium text-gray-700">Дополнительный доход</label>
+                    <input
+                        v-model="addIncome"
+                        @input="addIncomeMask()"
+                        placeholder="0"
+                        type="text"
+                        name="addIncome"
+                        id="addIncome"
+                        autocomplete="addIncome"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                  </div>
+
+                  <div class="col-span-6 2xl:col-span-2 sm:col-span-4 relative rounded-md border border-gray-300 shadow-sm p-2">
+                    <fieldset>
+                      <legend class="text-base font-medium text-gray-700">Способ подтверждения дохода:</legend>
+                      <div class="mt-2 space-y-2">
+                        <div class="flex items-center gap-x-3">
+                          <input v-model="confirmIncome" value="2НДФЛ" id="confirmIncome1" name="confirmIncome" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                          <label for="confirmIncome1" class="block text-sm font-medium leading-6 text-gray-700">2НДФЛ</label>
+                        </div>
+                        <div class="flex items-center gap-x-3">
+                          <input v-model="confirmIncome" value="Форма Банка Выписка" id="confirmIncome2" name="confirmIncome" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                          <label for="confirmIncome2" class="block text-sm font-medium leading-6 text-gray-700">Форма Банка Выписка</label>
+                        </div>
+                        <div class="flex items-center gap-x-3">
+                          <input v-model="confirmIncome" value="Доверенные лица" id="confirmIncome3" name="confirmIncome" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                          <label for="confirmIncome3" class="block text-sm font-medium leading-6 text-gray-700">Доверенные лица</label>
+                        </div>
+                      </div>
+                      <p v-if="v$.confirmIncome.required.$invalid && v$.$dirty" class="absolute left-2 top-0 text-xs text-red-600">Выберите вариант</p>
+                    </fieldset>
+                  </div>
+
+                  <div class="col-span-6 self-start sm:col-span-2 relative rounded-md border border-gray-300 shadow-sm p-2">
+                      <div class="relative flex gap-x-3">
+                        <div class="flex h-6 items-center">
+                          <input v-model="debt" id="debt" name="debt" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                        </div>
+                        <div class="text-sm leading-6">
+                          <label for="debt" class="font-medium text-gray-900">Задолженность на ФССП?</label>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-span-6 self-start sm:col-span-4 relative rounded-md border border-gray-300 shadow-sm p-2">
+                      <div class="flex justify-between gap-1.5">
+                        <span class="mb-2 block font-medium text-gray-900">Количество текущих кредитов</span>
+                        <span class="mb-2 block font-medium text-red-600">{{loans}}</span>
+                      </div>
+                      <input v-model="loans" min="0" max="20" id="loans" name="loans" type="range" class="w-full">
+                  </div>
+
+                  <div class="col-span-6 self-start sm:col-span-4 relative rounded-md border border-gray-300 shadow-sm p-2">
+                    <div class="flex justify-between gap-1.5">
+                      <span class="mb-2 block font-medium text-gray-900">Какая максимальная просрочка в днях</span>
+                      <span class="mb-2 block font-medium text-red-600">{{delay}}</span>
+                    </div>
+                    <input v-model="delay" min="0" max="300" id="loans" name="delay" type="range" class="w-full">
+                  </div>
+
                 </div>
               </div>
               <div class="bg-gray-50 px-4 py-3 sm:px-6">
-                <button @click.prevent="sendData" type="submit" class="w-full sm:w-auto inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-6 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Отправить запрос в БКИ</button>
+                <button @click.prevent="validate" type="submit" class="w-full sm:w-auto inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-6 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Отправить запрос в БКИ</button>
               </div>
             </div>
           </form>
         </div>
       </div>
     </div>
+
+    <transition name="modal">
+      <div
+          v-show="modal"
+          class="relative z-40">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+          <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+
+              <div @click="modal = false" class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10 absolute right-1 top-1">
+                <svg class="h-6 w-6 text-red-600" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" stroke="currentColor">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <g id="Menu / Close_LG">
+                      <path id="Vector" d="M21 21L12 12M12 12L3 3M12 12L21.0001 3M12 12L3 21.0001" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+
+              <div class="bg-white px-4 pt-10 pb-4 sm:p-6 sm:pb-4">
+                <div>
+                  <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 class="text-lg text-green-600 leading-6 font-bold mb-2">{{name}}</h3>
+                    <h3 class="text-lg leading-6 font-bold mb-2">Даете ли вы согласие на обработку персональных данных согласно 152 ФЗ?</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 sm:flex sm:px-6">
+                <button
+                    @click="sendData"
+                    type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:w-auto sm:text-sm">Даю</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+
   </div>
 </template>
 
@@ -254,7 +389,15 @@ export default {
       addressF: '',
       matches: false,
       goal: 'Бизнес',
-      sum: ''
+      sum: '',
+      job: '',
+      income: '',
+      addIncome: '',
+      confirmIncome: '',
+      debt: false,
+      loans: 0,
+      delay: 0,
+      modal: false
     }
   },
   methods: {
@@ -271,21 +414,39 @@ export default {
       this.addressF = ''
       this.matches = false
       this.goal = 'Бизнес'
-      this.sum = ''
+      this.sum = '',
+      this.job = '',
+      this.income = '',
+      this.addIncome = '',
+      this.confirmIncome = '',
+      this.debt = false,
+      this.loans = 0,
+      this.delay = 0
     },
     sumMask() {
       this.sum = this.sum.replace(/\D/g, '')
       this.sum = this.sum.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ')
     },
+    incomeMask() {
+      this.income = this.income.replace(/\D/g, '')
+      this.income = this.income.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ')
+    },
+    addIncomeMask() {
+      this.addIncome = this.addIncome.replace(/\D/g, '')
+      this.addIncome = this.addIncome.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ')
+    },
     matchesAddress() {
       this.matches ? this.addressF = this.address : this.addressF = ''
     },
-    sendData() {
+    validate() {
       if(this.v$.$invalid) {
         this.v$.$touch()
         return
       }
-      this.$emit('loading', this.sum)
+      this.modal = true
+    },
+    sendData() {
+      this.$emit('loading', this.sum, this.delay)
       this.v$.$reset()
       this.clearData()
     }
@@ -320,11 +481,21 @@ export default {
       },
       address: { required },
       addressF: { required },
-      sum: { required }
+      sum: { required },
+      job: { required },
+      income: { required },
+      confirmIncome: { required }
     }
   }
 }
 </script>
 
 <style scoped>
+.modal-enter-active {
+  transition: opacity 0.5s ease;
+}
+
+.modal-enter-from {
+  opacity: 0;
+}
 </style>

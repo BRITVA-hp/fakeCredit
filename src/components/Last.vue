@@ -120,6 +120,9 @@ export default {
     sum: {
       required: true
     },
+    delay: {
+      required: true
+    },
   },
   data() {
     return {
@@ -158,7 +161,8 @@ export default {
         },
         {
           name: 'unicredit',
-          logo: '/img/banks/unicredit.png'
+          logo: '/img/banks/unicredit.png',
+          refusal: true
         },
         {
           name: 'renessans',
@@ -236,6 +240,14 @@ export default {
     //генерация одобренных сумм
     const addPercent = Math.round(Math.random() * (35 -25) + 25)
     const fullSum = Math.round(this.sum + ((this.sum * addPercent)/100))
+    let numBanks
+    if(this.delay == 0) {
+      numBanks = 2
+    } else {
+      numBanks = Math.round((Math.random() * (4 - 3) + 3));
+    }
+
+    console.log(numBanks)
 
     //генерация одобренных банков
     let num = Math.random() * (3 - 0) + 0

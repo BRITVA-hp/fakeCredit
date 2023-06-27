@@ -10,7 +10,7 @@
     </transition>
 
     <transition>
-      <last-app :sum="+sum.replace(/\D/g, '')" v-if="lastApp" @lastAppFalse="lastAppFalse(), mainAppTrue()" @apply="apply()" />
+      <last-app :delay="delay" :sum="+sum.replace(/\D/g, '')" v-if="lastApp" @lastAppFalse="lastAppFalse(), mainAppTrue()" @apply="apply()" />
     </transition>
 
   </section>
@@ -41,9 +41,10 @@ export default {
     return {
       loader: false,
       sum: '1 000 000',
-      mainApp: true,
+      mainApp: false,
       loadingApp: false,
-      lastApp: false
+      lastApp: true,
+      delay: 0
     }
   },
   methods: {
@@ -57,10 +58,11 @@ export default {
         clearTimeout(timeout)
       }, 5000)
     },
-    loading(sum) {
+    loading(sum, delay) {
       this.mainAppFalse()
       this.loadingAppTrue()
       this.sum = sum
+      this.delay = delay
     },
     mainAppTrue() {
       this.mainApp = true
