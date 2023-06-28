@@ -19,7 +19,7 @@
 
         <div class="col-span-3 lg:col-span-1 text-center">
           <p class="text-white sm:text-slate-600 font-bold text-md lg:text-xl">Запрашиваемая сумма:</p>
-          <p class="text-red-500 text-xl lg:text-2xl font-bold">{{ prettify(sum) }} ₽</p>
+          <p class="text-red-500 text-xl lg:text-2xl font-bold">{{ prettify(client.sum) }} ₽</p>
         </div>
 
         <div class="col-span-3 lg:col-span-1 text-center lg:text-right">
@@ -31,7 +31,7 @@
       <div class="grid grid-cols-12 lg:gap-6 gap-3 items-stretch">
 
         <div
-          v-for="(card, cardIndex) in banksFinals"
+          v-for="(card, cardIndex) in banks"
           :key="cardIndex"
           @click="activeBank(cardIndex)"
           :class="card.checked ? 'border-green-500' : 'border-transparent'"
@@ -75,7 +75,8 @@
                     <div class="mb-3 flex justify-center">
                       <img :src="modalContent.img" alt="bank">
                     </div>
-                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h2 class="text-lg text-green-600 leading-6 font-bold mb-2 text-center">{{client.name}}</h2>
+                    <div class="mt-3 text-center sm:mt-0 sm:text-left mb-4">
                       <h3 class="text-lg leading-6 font-bold mb-2">Условия:</h3>
                       <div>
                         <div class="flex justify-between flex-col sm:flex-row mb-1">
@@ -88,15 +89,26 @@
                         </div>
                       </div>
                     </div>
+                    <div class="col-span-6 self-start sm:col-span-4 relative rounded-md border border-gray-300 shadow-sm p-2">
+                      <div class="flex justify-between gap-1.5">
+                        <span class="mb-2 block font-medium text-gray-900">Сумма кредита:</span>
+                        <span class="mb-2 block font-medium text-red-600">{{prettify(sum)}}</span>
+                      </div>
+                      <input v-model="sum" min="200000" :max="modalContent.sum" step="1" id="sum" name="sum" type="range" class="w-full">
+                    </div>
                   </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button
-                    @click="apply"
-                    type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Отправить</button>
-                  <button
-                    @click="closeModal"
-                    type="button" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Отмена</button>
+                <div class="bg-gray-50 px-4 py-3 border-t-2">
+                  <div class="sm:flex sm:flex-row-reverse sm:px-6 mb-2 justify-center">
+                    <button
+                      @click="apply"
+                      type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Передать</button>
+                    <button
+                      @click="closeModal"
+                      type="button" class="mt-1 inline-flex w-full justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-white text-base font-medium shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Отмена</button>
+                  </div>
+                  <p class="text-xs text-red-500 text-center">* Самостоятельное получение кредита невозможно</p>
+                  <p class="text-xs text-center">Требуется провести анализ и устранить негативные факторы</p>
                 </div>
               </div>
             </div>
@@ -117,47 +129,31 @@ export default {
     RobotApp
   },
   props: {
-    sum: {
-      required: true
-    },
-    delay: {
-      required: true
-    },
+    client: {
+      required: true,
+      type: Object
+    }
   },
   data() {
     return {
+      sum: '',
       totalTime: 7200,
       time: '',
       score: '',
-      banksFinals: [],
       modal: false,
       modalContent: {},
-      couples: [
-        {
-          bank1: 'loko',
-          bank2: 'otp'
-        },
-        {
-          bank1: 'ubrir',
-          bank2: 'open'
-        },
-        {
-          bank1: 'renessans',
-          bank2: 'psb'
-        }
-      ],
       banks: [
         {
           name: 'loko',
-          logo: '/img/banks/loko.png'
+          logo: '/img/banks/loko.png',
         },
         {
           name: 'otp',
-          logo: '/img/banks/otp.png'
+          logo: '/img/banks/otp.png',
         },
         {
           name: 'ubrir',
-          logo: '/img/banks/ubrir.png'
+          logo: '/img/banks/ubrir.png',
         },
         {
           name: 'unicredit',
@@ -166,31 +162,31 @@ export default {
         },
         {
           name: 'renessans',
-          logo: '/img/banks/renessans.png'
+          logo: '/img/banks/renessans.png',
         },
         {
           name: 'psb',
-          logo: '/img/banks/psb.png'
+          logo: '/img/banks/psb.png',
         },
         {
           name: 'rosselhoz',
-          logo: '/img/banks/rosselhoz.png'
+          logo: '/img/banks/rosselhoz.png',
         },
         {
           name: 'rajffajzen',
-          logo: '/img/banks/rajffajzen.png'
+          logo: '/img/banks/rajffajzen.png',
         },
         {
           name: 'alfa',
-          logo: '/img/banks/alfa.png'
+          logo: '/img/banks/alfa.png',
         },
         {
           name: 'rosgosstrah',
-          logo: '/img/banks/rosgosstrah.png'
+          logo: '/img/banks/rosgosstrah.png',
         },
         {
           name: 'smp',
-          logo: '/img/banks/smp.png'
+          logo: '/img/banks/smp.png',
         },
         {
           name: 'open',
@@ -210,21 +206,23 @@ export default {
     closeModal() {
       this.modal = false
       this.modalContent.percent = {}
-      this.banksFinals.forEach(bank => {
+      this.banks.forEach(bank => {
         bank.checked = false
       })
     },
-    activeBank(index) {
-      if(!this.banksFinals[index].agree) {
+    async activeBank(index) {
+      if(!this.banks[index].agree) {
         return
       }
-      this.banksFinals.forEach(bank => {
+      this.banks.forEach(bank => {
         bank.checked = false
       })
-      this.banksFinals[index].checked = true
-      this.modalContent.img = this.banksFinals[index].logo
-      this.modalContent.percent = this.banksFinals[index].percent
-      this.modalContent.sum = this.banksFinals[index].sum
+      this.banks[index].checked = true
+      this.modalContent.img = this.banks[index].logo
+      this.modalContent.percent = this.banks[index].percent
+      this.modalContent.sum = this.banks[index].sum
+      await this.$nextTick()
+      this.sum = this.client.sum
       this.modal = true
     },
     prettify(num) {
@@ -238,52 +236,83 @@ export default {
     this.score = Math.round(Math.random() * (690 - 650) + 650)
 
     //генерация одобренных сумм
-    const addPercent = Math.round(Math.random() * (35 -25) + 25)
-    const fullSum = Math.round(this.sum + ((this.sum * addPercent)/100))
-    let numBanks
-    if(this.delay == 0) {
-      numBanks = 2
-    } else {
-      numBanks = Math.round((Math.random() * (4 - 3) + 3));
-    }
+    // const addPercent = Math.round(Math.random() * (30 -20) + 20)
+    // const fullSum = Math.round(this.sum + ((this.sum * addPercent)/100))
 
-    console.log(numBanks)
+    //количество одобренных банков
+    let numBanks
+    this.client.delay > 0 ? numBanks = 2 :  numBanks = Math.round((Math.random() * (4 - 3) + 3));
+
+    //функция для генерации одобренных банков
+    const agreeBank = (min, max) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      const index = Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+      if(('refusal' in this.banks[index] && this.banks[index].refusal) || 'agree' in this.banks[index]) {
+        agreeBank(min, max)
+      } else {
+        this.banks[index].agree = true
+        this.banks[index].sum = this.client.sum
+        if(this.client.delay === 0) {
+          this.banks[index].percent = (Math.random() * (12.5 - 9.5) + 9.5).toFixed(1)
+        } else {
+          this.banks[index].percent = (Math.random() * (12.5 - 11.5) + 11.5).toFixed(1)
+        }
+        this.banks.splice(0, 0, this.banks.splice(index, 1)[0])
+      }
+    }
 
     //генерация одобренных банков
-    let num = Math.random() * (3 - 0) + 0
-    if (Math.trunc(num) === 3) {
-      num = 2
+    for(let i = 1; i <= numBanks; i++) {
+      agreeBank(0, this.banks.length)
     }
-    const couplesIndex = Math.trunc(num)
-    this.banks.forEach(el => {
-      if (el.name === this.couples[couplesIndex].bank1) {
-        this.banksFinals.unshift(el)
-        this.banksFinals[0].agree = true
-        this.banksFinals[0].sum = this.sum
-
-        //генерация годового процента
-        if(this.sum < 1000000) {
-          this.banksFinals[0].percent = (Math.random() * (16 - 12.5) + 12.5).toFixed(1)
-        } else {
-          this.banksFinals[0].percent = (Math.random() * (12.5 - 10.4) + 10.4).toFixed(1)
-        }
-      } else
-      if(el.name === this.couples[couplesIndex].bank2) {
-        this.banksFinals.unshift(el)
-        this.banksFinals[0].agree = true
-        this.banksFinals[0].sum =  fullSum - (fullSum % 1000)
-
-        //генерация годового процента
-        if(this.sum < 1000000) {
-          this.banksFinals[0].percent = (Math.random() * (16 - 12.5) + 12.5).toFixed(1)
-        } else {
-          this.banksFinals[0].percent = (Math.random() * (12.5 - 10.4) + 10.4).toFixed(1)
-        }
+    for(let i = 1; i <= numBanks; i++) {
+      if(i>1) {
+        const addPercent = Math.round(Math.random() * (30 -20) + 20)
+        const fullSum = Math.round(this.client.sum + ((this.client.sum * addPercent)/100))
+        this.banks[i-1].sum = fullSum - (fullSum % 1000)
       }
-      else {
-        this.banksFinals.push(el)
-      }
-    })
+    }
+    if(numBanks === 4) {
+      this.banks[1].sum = this.client.sum
+    }
+
+    //генерация одобренных банков
+    // let num = Math.random() * (3 - 0) + 0
+    // if (Math.trunc(num) === 3) {
+    //   num = 2
+    // }
+
+    // const couplesIndex = Math.trunc(num)
+    // this.banks.forEach(el => {
+    //   if (el.name === this.couples[couplesIndex].bank1) {
+    //     this.banksFinals.unshift(el)
+    //     this.banksFinals[0].agree = true
+    //     this.banksFinals[0].sum = this.sum
+    //
+    //     //генерация годового процента
+    //     if(this.sum < 1000000) {
+    //       this.banksFinals[0].percent = (Math.random() * (16 - 12.5) + 12.5).toFixed(1)
+    //     } else {
+    //       this.banksFinals[0].percent = (Math.random() * (12.5 - 10.4) + 10.4).toFixed(1)
+    //     }
+    //   } else
+    //   if(el.name === this.couples[couplesIndex].bank2) {
+    //     this.banksFinals.unshift(el)
+    //     this.banksFinals[0].agree = true
+    //     this.banksFinals[0].sum =  fullSum - (fullSum % 1000)
+    //
+    //     //генерация годового процента
+    //     if(this.sum < 1000000) {
+    //       this.banksFinals[0].percent = (Math.random() * (16 - 12.5) + 12.5).toFixed(1)
+    //     } else {
+    //       this.banksFinals[0].percent = (Math.random() * (12.5 - 10.4) + 10.4).toFixed(1)
+    //     }
+    //   }
+    //   else {
+    //     this.banksFinals.push(el)
+    //   }
+    // })
 
   },
   mounted() {

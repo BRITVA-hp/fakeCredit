@@ -446,7 +446,7 @@ export default {
       this.modal = true
     },
     sendData() {
-      this.$emit('loading', this.sum, this.delay)
+      this.$emit('loading', this.name, this.sum, this.delay)
       this.v$.$reset()
       this.clearData()
     }
