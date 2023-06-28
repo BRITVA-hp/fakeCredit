@@ -268,12 +268,16 @@
                           <label for="confirmIncome1" class="block text-sm font-medium leading-6 text-gray-700">2НДФЛ</label>
                         </div>
                         <div class="flex items-center gap-x-3">
-                          <input v-model="confirmIncome" value="Форма Банка Выписка" id="confirmIncome2" name="confirmIncome" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                          <label for="confirmIncome2" class="block text-sm font-medium leading-6 text-gray-700">Форма Банка Выписка</label>
+                          <input v-model="confirmIncome" value="Форма Банка" id="confirmIncome2" name="confirmIncome" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                          <label for="confirmIncome2" class="block text-sm font-medium leading-6 text-gray-700">Форма Банка</label>
                         </div>
                         <div class="flex items-center gap-x-3">
-                          <input v-model="confirmIncome" value="Доверенные лица" id="confirmIncome3" name="confirmIncome" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                          <label for="confirmIncome3" class="block text-sm font-medium leading-6 text-gray-700">Доверенные лица</label>
+                          <input v-model="confirmIncome" value="Выписка" id="confirmIncome3" name="confirmIncome" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                          <label for="confirmIncome3" class="block text-sm font-medium leading-6 text-gray-700">Выписка</label>
+                        </div>
+                        <div class="flex items-center gap-x-3">
+                          <input v-model="confirmIncome" value="Доверенные лица" id="confirmIncome4" name="confirmIncome" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                          <label for="confirmIncome4" class="block text-sm font-medium leading-6 text-gray-700">Доверенные лица</label>
                         </div>
                       </div>
                       <p v-if="v$.confirmIncome.required.$invalid && v$.$dirty" class="absolute left-2 top-0 text-xs text-red-600">Выберите вариант</p>

@@ -45,9 +45,9 @@ export default {
         delay: 0
       },
       loader: false,
-      mainApp: true,
+      mainApp: false,
       loadingApp: false,
-      lastApp: false,
+      lastApp: true,
     }
   },
   methods: {
