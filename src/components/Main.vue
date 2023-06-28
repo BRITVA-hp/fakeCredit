@@ -40,6 +40,21 @@
                   </div>
 
                   <div class="col-span-6 sm:col-span-2 relative">
+                    <label for="last-name" class="block text-sm font-medium text-gray-700">Телефон</label>
+                    <input
+                      v-model="phone"
+                      v-maska="'+7 (###) ###-####'"
+                      placeholder="+7 (___) ___-____"
+                      type="text"
+                      name="last-name"
+                      id="last-name"
+                      autocomplete="family-name"
+                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    <p v-if="v$.phone.required.$invalid && v$.$dirty" class="absolute left-2 top-6 text-xs text-red-600">Обязательное поле</p>
+                    <p v-else-if="v$.phone.minLength.$invalid && v$.$dirty" class="absolute left-2 top-6 text-xs text-red-600">Неверный формат</p>
+                  </div>
+
+                  <div class="col-span-6 sm:col-span-2 relative">
                     <label for="last-name" class="block text-sm font-medium text-gray-600">Дата рождения</label>
                     <input
                         v-model="DOB"
@@ -52,21 +67,6 @@
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                     <p v-if="v$.DOB.$invalid && v$.$dirty" class="absolute left-2 top-6 text-xs text-red-600">Обязательное поле</p>
                     <p v-else-if="v$.DOB.minLength.$invalid && v$.$dirty" class="absolute left-2 top-6 text-xs text-red-600">Неверный формат</p>
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-2 relative">
-                    <label for="last-name" class="block text-sm font-medium text-gray-700">Телефон</label>
-                    <input
-                      v-model="phone"
-                      v-maska="'+7 (###) ###-####'"
-                        placeholder="+7 (___) ___-____"
-                        type="text"
-                        name="last-name"
-                        id="last-name"
-                        autocomplete="family-name"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                    <p v-if="v$.phone.required.$invalid && v$.$dirty" class="absolute left-2 top-6 text-xs text-red-600">Обязательное поле</p>
-                    <p v-else-if="v$.phone.minLength.$invalid && v$.$dirty" class="absolute left-2 top-6 text-xs text-red-600">Неверный формат</p>
                   </div>
                   <hr class="col-span-6 my-4">
 
@@ -332,7 +332,7 @@
           <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
 
-              <div @click="modal = false" class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10 absolute right-1 top-1">
+              <div @click="modal = false" class="cursor-pointer mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10 absolute right-1 top-1">
                 <svg class="h-6 w-6 text-red-600" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" stroke="currentColor">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -347,8 +347,116 @@
               <div class="bg-white px-4 pt-10 pb-4 sm:p-6 sm:pb-4">
                 <div>
                   <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 class="text-lg text-green-600 leading-6 font-bold mb-2">{{name}}</h3>
-                    <h3 class="text-lg leading-6 font-bold mb-2">Даете ли вы согласие на обработку персональных данных согласно 152 ФЗ?</h3>
+                    <div>
+                      <div class="px-4 sm:px-0">
+                        <h3 class="text-base font-semibold leading-7 text-gray-900">Информация о клиенте:</h3>
+                      </div>
+                      <p class="mt-1 max-w-2xl text-sm font-medium leading-6 text-green-600">Основные данные:</p>
+                      <div class="mt-3 border-t border-gray-100">
+                        <dl class="divide-y divide-gray-100">
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Имя</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{name}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Телефон</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{phone}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Дата рождения</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{DOB}}</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <hr>
+                      <p class="mt-3 max-w-2xl text-sm font-medium leading-6 text-green-600">Паспортные данные:</p>
+                      <div class="mt-3 border-t border-gray-100">
+                        <dl class="divide-y divide-gray-100">
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Серия</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{series}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Номер</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{number}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Код подразделения</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{code}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Кем выдан</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{organ}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Дата выдачи</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{date}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Адрес регистрации</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{address}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Адрес фактического проживания</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{addressF}}</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <hr>
+
+                      <p class="mt-3 max-w-2xl text-sm font-medium leading-6 text-green-600">Другие данные клиента:</p>
+                      <div class="mt-3 border-t border-gray-100">
+                        <dl class="divide-y divide-gray-100">
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Должность</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{job}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Доход</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{income}} ₽</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Дополнительный доход</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{addIncome ? addIncome : 0}} ₽</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Способ подтверждения дохода</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{confirmIncome}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Задолженность на ФССП?</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{debt ? 'Да' : 'Нет'}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Количество текущих кредитов</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{loans}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Максимальная просрочка в днях</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{delay}}</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <hr>
+
+                      <p class="mt-3 max-w-2xl text-sm font-medium leading-6 text-green-600">Данные по кредиту:</p>
+                      <div class="mt-3 border-t border-gray-100">
+                        <dl class="divide-y divide-gray-100">
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Цель кредитования</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{goal}}</dd>
+                          </div>
+                          <div class="px-1 py-2 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+                            <dt class="text-sm font-medium leading-6 text-gray-900">Сумма кредита</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0">{{sum}} ₽</dd>
+                          </div>
+                        </dl>
+                      </div>
+
+                    </div>
+                    <hr>
+
+                    <h3 class="text-medium text-red-500 leading-6 font-bold mt-2">Даете ли вы согласие на обработку персональных данных согласно 152 ФЗ?</h3>
                   </div>
                 </div>
               </div>
